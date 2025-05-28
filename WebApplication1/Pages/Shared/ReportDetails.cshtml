@@ -1,0 +1,30 @@
+﻿@model WebApplication1.Models.Report
+@{
+    ViewData["Title"] = $"Отчёт №{Model.Id}";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10"> 
+         <div class="card mb-4">
+    <div class="card-header bg-white py-3">
+        <h2 class="mb-0 fs-3">Детали отчёта</h2>
+    </div>
+    <div style="padding-top:15px" class="container">
+        <p ><strong>ID заявки:</strong> @Model.TicketId</p>
+        <p><strong>ФИО сотрудника:</strong> @Model.FullName</p>
+        <p><strong>Email получателя:</strong> @Model.EmailTo</p>
+                    <p><strong>Детали отчёта:</strong> @Model.Description</p>
+        <p><strong>Затраченное время:</strong> @Model.TimeSpentHours ч.</p>
+        <p><strong>Статус после отчёта:</strong> @Model.NewStatus</p>
+        <p><strong>Дата:</strong> @Model.ReportDate.ToString("dd.MM.yyyy HH:mm")</p>
+
+    </div>
+    
+    </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                <a asp-controller="Report" asp-action="AllReports" class="btn btn-outline-secondary me-md-2">Назад ко всем отчётам</a>
+            </div>
+    </div>
+    </div>
+</div>

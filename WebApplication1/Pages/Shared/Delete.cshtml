@@ -1,0 +1,64 @@
+﻿@model WebApplication1.Models.Ticket
+
+@{
+    ViewData["Title"] = "Удалить заявку";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card mb-4">
+                <div class="card-header bg-white py-3">
+                    <h2 class="mb-0 fs-3">Вы уверены, что хотите удалить эту заявку?</</h2>
+                </div>
+                <div style="padding-top:15px" class="container">
+                    <dl class="row">
+        <dt class="col-sm-2">ID</dt>
+        <dd class="col-sm-10">@Model.Id</dd>
+
+        <dt class="col-sm-2">Описание</dt>
+        <dd class="col-sm-10">@Model.Description</dd>
+
+        <dt class="col-sm-2">Дата создания</dt>
+        <dd class="col-sm-10">@Model.CreatedDate.ToString("dd.MM.yyyy HH:mm")</dd>
+
+        <dt class="col-sm-2">Статус</dt>
+        <dd class="col-sm-10">@Model.Status</dd>
+    </dl>
+
+                </div>
+
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                <form asp-controller="Tickets" asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                    <a asp-controller="" asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+@* <h3>Вы уверены, что хотите удалить эту заявку?</h3> *@
+@* <div> *@
+@*     <h4>Заявка</h4> *@
+@*     <hr /> *@
+@*     <dl class="row"> *@
+@*         <dt class="col-sm-2">ID</dt> *@
+@*         <dd class="col-sm-10">@Model.Id</dd> *@
+
+@*         <dt class="col-sm-2">Описание</dt> *@
+@*         <dd class="col-sm-10">@Model.Description</dd> *@
+
+@*         <dt class="col-sm-2">Дата создания</dt> *@
+@*         <dd class="col-sm-10">@Model.CreatedDate.ToString("dd.MM.yyyy HH:mm")</dd> *@
+
+@*         <dt class="col-sm-2">Статус</dt> *@
+@*         <dd class="col-sm-10">@Model.Status</dd> *@
+@*     </dl> *@
+
+@*     <form asp-controller="Tickets" asp-action="Delete" method="post"> *@
+@*         <input type="hidden" asp-for="Id" /> *@
+@*         <button type="submit" class="btn btn-danger">Удалить</button> *@
+@*         <a asp-controller="" asp-action="Index" class="btn btn-outline-secondary">Отмена</a> *@
+@*     </form> *@
+@* </div> *@

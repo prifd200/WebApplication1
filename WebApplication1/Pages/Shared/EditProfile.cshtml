@@ -1,0 +1,68 @@
+﻿@model WebApplication1.Models.EditProfileViewModel
+@{
+    ViewData["Title"] = "Редактировать профиль";
+}
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h2 class="mb-0 fs-3">Редактировать профиль</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <form asp-controller="Profile" asp-action="Edit" method="post">
+                            <input asp-for="Username" hidden />
+                            <div class="mb-4">
+                                <label asp-for="FirstName" class="form-label">Имя</label>
+                                <input asp-for="FirstName" class="form-control" />
+                            </div>
+
+                            <div class="mb-4">
+                                <label asp-for="LastName" class="form-label">Фамилия</label>
+                                <input asp-for="LastName" class="form-control" />
+                            </div>
+
+                            
+                            <div class="mb-4">
+                                    <label asp-for="NewEmail" class="form-label"></label>
+                                <input asp-for="NewEmail" class="form-control" />
+                                <span asp-validation-for="NewEmail" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                                <a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+                            </div>
+                                
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+@* <h2>Редактировать профиль</h2> *@
+
+@* <form asp-action="Edit" method="post"> *@
+@*     <div class="formmb-4"> *@
+@*         <label asp-for="FirstName">Имя</label> *@
+@*         <input asp-for="FirstName" class="form-control" /> *@
+@*     </div> *@
+
+@*     <div class="form-group"> *@
+@*         <label asp-for="LastName">Фамилия</label> *@
+@*         <input asp-for="LastName" class="form-control" /> *@
+@*     </div> *@
+@*     <form asp-action="EditEmail" method="post"> *@
+@*         <div class="form-group"> *@
+@*             <label asp-for="NewEmail"></label> *@
+@*             <input asp-for="NewEmail" class="form-control" /> *@
+@*             <span asp-validation-for="NewEmail" class="text-danger"></span> *@
+@*         </div> *@
+
+@*         <button type="submit" class="btn btn-success">Сохранить</button> *@
+@*         <a asp-action="Index" class="btn btn-secondary">Отмена</a> *@
+@*     </form> *@
+@* </form> *@

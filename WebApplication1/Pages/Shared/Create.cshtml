@@ -1,0 +1,60 @@
+﻿@model WebApplication1.Models.Ticket
+@using WebApplication1.Models;
+@{
+    ViewData["Title"] = "Новая заявка";
+}
+
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h2 class="mb-0 fs-3">Создание заявки</h2>
+                    </div>
+                    <div class="card-body p-4">
+                    <form asp-controller="Tickets" asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="mb-4">
+                                <label asp-for="Description" class="form-label required-field">Описание заявки</label>
+                                <textarea asp-for="Description" style="resize:none" class="form-control" rows="4" placeholder="Опишите заявку как можно подробнее"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                            <div class="mb-4">
+                                <label asp-for="Status" class="form-label required-field">Статус заявки</label>
+                            <select asp-for="Status" asp-items="Html.GetEnumSelectList<TicketStatus>()" class="form-control">
+                                <option selected="selected" value="">-- Выберите статус --</option>
+                            </select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                                
+                        </div>
+                            <div class="mb-4">
+                                <label asp-for="Category" class="form-label required-field">Категория заявки</label>
+                                <select asp-for="Category" asp-items="Html.GetEnumSelectList<TicketCategory>()" class="form-select">
+                                <option selected="selected" value="">-- Выберите категорию --</option>
+                            </select>
+                            <span asp-validation-for="Category" class="text-danger"></span>
+                                
+                        </div>
+                            <div class="mb-4">
+                            <input asp-for="IsPriority" type="checkbox" class="form-check-input" />
+                            <label asp-for="IsPriority" class="form-check-label">Приоритетная заявка</label>
+                                <div class="form-text text-muted mt-1">
+                                    Отметьте это поле, если ваш запрос требует срочного внимания.
+                                </div>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <button type="submit" class="btn btn-primary">Сохранить заявку</button>
+                                <a asp-controller="" asp-action="Index" class="btn btn-outline-secondary me-md-2">Отмена</a>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+     

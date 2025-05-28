@@ -1,0 +1,264 @@
+﻿@model PaginatedList<WebApplication1.Models.Ticket>
+@using WebApplication1.Models
+@using WebApplication1.Controllers
+@* <style type="text/css" id="operaUserStyle"></style> *@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<form asp-controller="Tickets" method="get" asp-action="Index">
+ <div class="sidebar">
+    <div class="filter-section">
+            <div class="filter-section">
+                <div class="filter-title">Описание</div>
+                <input class="form-control" type="text" name="searchString" value="@ViewBag.SearchString" placeholder="Поиск по описанию" />
+            </div>
+        
+        <div class="filter-title">Статус</div>
+            <div class="filter-section">
+                <select name="statusFilter" class="form-select">
+                <option value="">Все статусы</option>
+                @foreach (var status in Enum.GetValues(typeof(TicketStatus)))
+                {
+                    <option value="@((int)status)" selected="@(ViewBag.SelectedStatus?.ToString() == status.ToString())">@status</option>
+                }
+            </select>
+        </div>
+            <div class="filter-section">
+            <div class="filter-title">Приоритет</div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="isPriorityFilter" value="true" @(ViewBag.IsPriorityFilter != null && ViewBag.IsPriorityFilter ? "checked" : "") />
+                <label class="form-check-label">Только приоритетные</label>
+            </div>
+        </div>
+            <div class="filter-section">
+                <div class="filter-title">Дата создания</div>
+                <select class="form-select" name="dateSortOrder">
+                <option value="0" selected="@(ViewBag.DateSortOrder == 0)">Дата: от старых</option>
+                <option value="1" selected="@(ViewBag.DateSortOrder == 1)">Дата: от новых</option>
+                </select>
+            </div>
+            <div class="filter-section">
+                
+                    <div class="filter-title">Категории</div>
+                    <div >
+                       <div class="form-check">
+                        <input asp-controller="Tickets" asp-action="Index" id="categoryAll" type="radio" class="form-check-input" name="categoryFilter" value="null" @(ViewBag.SelectedCategory == null ? "checked" : "") />
+                        <label class="form-check-label" for="categoryAll">Все заявки</label>
+                        </div>
+                    <div class="form-check">
+                        <input asp-controller="Tickets" asp-action="Index" id="categoryTP" type="radio" class="form-check-input" name="categoryFilter" value="@WebApplication1.Models.TicketCategory.ТехническаяПоддержка" @(ViewBag.SelectedCategory == TicketCategory.ТехническаяПоддержка ? "checked" : "") />
+                        <label class="form-check-label" for="categoryTP">Техническая поддержка</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-controller="Tickets" asp-action="Index" id="category1C" type="radio" class="form-check-input" name="categoryFilter" value="@WebApplication1.Models.TicketCategory.Поддержка1С" @(ViewBag.SelectedCategory == TicketCategory.Поддержка1С ? "checked" : "") />
+                        <label class="form-check-label" for="category1C">Поддержка 1С</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-controller="Tickets" asp-action="Index" id="categoryBuy" type="radio" class="form-check-input" name="categoryFilter" value="@WebApplication1.Models.TicketCategory.ЗакупкаТехники" @(ViewBag.SelectedCategory == TicketCategory.ЗакупкаТехники ? "checked" : "") />
+                        <label class="form-check-label" for="categoryBuy">Закупка техники</label>
+                    </div>
+                        @* <a asp-controller="Tickets" asp-action="Index" class="list-group-item list-group-item-action @(ViewBag.SelectedCategory == null ? "active" : "")"> *@
+                        @*     Все заявки *@
+                        @* </a> *@
+                        @* <a asp-controller="Tickets" asp-action="Index" asp-route-categoryFilter="@WebApplication1.Models.TicketCategory.ТехническаяПоддержка" *@
+                        @*    class="list-group-item list-group-item-action @(ViewBag.SelectedCategory == WebApplication1.Models.TicketCategory.ТехническаяПоддержка ? "active" : "")"> *@
+                        @*     Техническая поддержка *@
+                        @* </a> *@
+                        @* <a asp-controller="Tickets" asp-action="Index" asp-route-categoryFilter="@WebApplication1.Models.TicketCategory.Поддержка1С" *@
+                        @*    class="list-group-item list-group-item-action @(ViewBag.SelectedCategory == WebApplication1.Models.TicketCategory.Поддержка1С ? "active" : "")"> *@
+                        @*     Поддержка 1С *@
+                        @* </a> *@
+                        @* <a asp-controller="Tickets" asp-action="Index" asp-route-categoryFilter="@WebApplication1.Models.TicketCategory.ЗакупкаТехники" *@
+                        @*    class="list-group-item list-group-item-action @(ViewBag.SelectedCategory == WebApplication1.Models.TicketCategory.ЗакупкаТехники ? "active" : "")"> *@
+                        @*     Закупка техники *@
+                        @* </a> *@
+                    </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Применить</button>
+            <a asp-action="Index" class="btn btn-outline-primary w-100 mt-3">Сбросить</a>
+
+            
+                <div class="users-online">
+                    <div class="d-flex align-items-center">
+                        <div class="me-2">
+                            <i class="bi bi-person-fill text-success">
+
+                            </i>
+                        </div>
+                        <div class="small text-muted">
+                            Онлайн:
+                        </div>
+                        </div>
+
+                    <ul style="display:block" class="Polzovat">
+                            @if (ViewBag.OnlineUsers != null && ((IEnumerable<OnlineUser>)ViewBag.OnlineUsers).Any())
+                            {
+                                foreach (var user in (IEnumerable<OnlineUser>)ViewBag.OnlineUsers)
+                                {
+                                <li  class="Polzovat">
+                                        <strong>@user.Username</strong><br />
+                                        <small>@user.Email</small>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                            <li class="Polzovat">Нет активных пользователей</li>
+                            }
+                        </ul>
+                   
+                </div>
+    </div>
+
+   </div>
+
+</form>
+@* <p> *@
+@*     <a asp-controller="Tickets" asp-action="Create" class="btn btn-primary">Добавить заявку</a> *@
+@* </p> *@
+<div class="main-content">
+    <div class="page-header">
+    <h2>Заявки</h2>
+    <button class="btn btn-primary">
+        <a asp-controller="Tickets" asp-action="Create" class="btn btn-primary">Добавить заявку</a>
+    </button>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-header">
+            <tr>
+                <th>Приоритет</th>
+                <th>ID</th>
+                <th>Описание</th>
+                <th>Дата Создания</th>
+                <th>Сотрудник</th>
+                <th>Категория</th>
+                <th>Комментарии</th>
+                <th>Статус</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach (var ticket in Model.Items)
+                {
+                    string statusClass = ticket.Status switch
+                    {
+                        TicketStatus.Открыта => "status-open",
+                        TicketStatus.В_работе => "status-wip",
+                        TicketStatus.Завершена => "status-closed",
+                        _ => ""
+                    };
+
+                    <tr class="">
+                        <td style="width: 50px;">
+                            @if (ticket.IsPriority)
+                            {
+                                <span class="priority-indicator @(ticket.IsPriority ? "priority-high" : "")" title="Приоритетная заявка" style="font-size: 1.2em;"></span>
+                            }
+                        </td>
+                        <td>@ticket.Id</td>
+                        <td> <a href="#" data-bs-toggle="modal" data-bs-target="#commentsModal-@ticket.Id">@ticket.Description</a></td>
+                        <td>@ticket.CreatedDate.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td>@ticket.AssignedEmployeeName</td>
+                        <td>@ticket.Category</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-info btn-sm"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#commentsModal-@ticket.Id">
+                                Комментарии (@ticket.Comments.Count)
+                            </button>
+                        </td>
+                        <td> <span class="status-badge @statusClass">@Html.DisplayFor(modelItem => ticket.Status)</span></td>
+                        <td class="action-buttons">
+                                <a asp-controller="Report" asp-action="GenerateReport" asp-route-id="@ticket.Id" class="btn btn-sm btn-success"><i class="ri-check-line"></i></a>
+                            <a asp-controller="Tickets" asp-action="Edit" asp-route-id="@ticket.Id" class="btn btn-sm btn-primary"><i class="ri-edit-line"></i></a>
+                            <a asp-controller="Tickets" asp-action="Delete" asp-route-id="@ticket.Id" class="btn btn-sm btn-danger"><i class="ri-delete-bin-line"></i></a>
+                        </td>
+                    </tr>
+                    <div class="modal fade" id="commentsModal-@ticket.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Комментарии к заявке №@ticket.Id</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                                </div>
+                                <div class="modal-body">
+                                    @if (ticket.Comments.Any())
+                                    {
+                                        foreach (var comment in ticket.Comments.OrderBy(c => c.CreatedAt))
+                                        {
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                                    <p>@comment.Text</p>
+                                                    <small class="text-muted">
+                                                        @comment.Author.FirstName @comment.Author.LastName —
+                                                        @comment.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted">Нет комментариев.</p>
+                                    }
+
+                                    <!-- Форма добавления комментария -->
+                                    <form asp-controller="Comment" asp-action="Add" method="post">
+                                        <input type="number" hidden name="ticketId" value="@ticket.Id" />
+
+                                        <div class="form-group">
+                                            <label>Добавить комментарий</label>
+                                            <textarea name="text" class="form-control" rows="3" required></textarea>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-success mt-2">Добавить</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </tbody>
+        </table>
+        <div class="mt-4">
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+
+            <a asp-action="Index"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               class="btn btn-default @prevDisabled">Назад
+            </a>
+
+            <span style="vertical-align: middle">Страница @Model.PageIndex из @Model.TotalPages</span>
+
+            <a asp-action="Index"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               class="btn btn-default @nextDisabled">
+                Вперёд
+            </a>
+        </div>
+        </div>
+        </div>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+    </div>
+}
+@* <table class="table table-bordered table-striped"> *@
+@*     <thead> *@
+@*         <tr> *@
+@*             <th></th> *@
+@*             <th>ID</th> *@
+@*             <th>Description</th> *@
+@*             <th>Created Date</th> *@
+@*             <th>Сотрудник</th> *@
+@*             <th>Status</th> *@
+@*             <th></th> *@
+@*         </tr> *@
+@*     </thead> *@
+    
+@* </table> *@
+}

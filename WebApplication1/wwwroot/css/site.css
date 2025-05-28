@@ -1,0 +1,241 @@
+
+:root {
+    --primary-color: #0d6efd;
+}
+.auth-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 15px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+.form-control {
+    height: 50px;
+    border-radius: 4px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}
+.input-group-text {
+    background-color: transparent;
+    border-right: none;
+}
+
+.form-control.password {
+    border-left: none;
+}
+
+.password-toggle {
+    cursor: pointer;
+}
+.auth-switch {
+    cursor: pointer;
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.auth-switch:hover {
+    text-decoration: underline;
+}
+
+.invalid-feedback {
+    display: none;
+}
+
+body {
+    min-height: 100%;
+    background-color: #f8f9fa;
+}
+
+.sidebar {
+    background-color: white;
+    border-right: 1px solid #dee2e6;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    width: 15%;
+    overflow-y: auto;
+    
+}
+td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+.account-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    background-color: #fff;
+}
+
+.account-header {
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+.info-row {
+    width:100%;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.info-row:last-child {
+    border-bottom: none !important;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.info-value {
+    color: #212529;
+}
+.main-content {
+    margin-left: 15%;
+    padding: 20px;
+    min-height: 100vh;
+}
+.reportcontent {
+    margin-left:5%;
+    padding:20px;
+    margin-right:5%;
+}
+.main-container {
+
+}
+.filter-section {
+    margin-bottom: 20px;
+}
+footer {
+    position: static !important;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+.filter-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #495057;
+}
+
+.users-online {
+/*    position: fixed;
+    bottom: 20px;
+    left: 20px;*/
+    padding: 10px 15px;
+    border-radius: 8px;
+    z-index: 1000;
+    
+    max-width: 200px;
+}
+.Polzovat {
+    padding: 0;
+    list-style-type: none;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+.priority-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.priority-high {
+    position: relative;
+    transform: translate(300%,0);
+    background-color: #dc3545;
+}
+
+.priority-normal {
+    background-color: #6c757d;
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-open {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-wip {
+    background-color: #fff3cd;
+    color: #664d03;
+}
+
+.status-closed {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.action-buttons .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.table-header {
+    background-color: white;
+}
+table {
+    background-color: white;
+}
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.page-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.card {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: none;
+}
+.cardreg {
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+.form-label {
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.form-control, .form-select {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+}
+
+    .form-control:focus, .form-select:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    margin-top: 0.2em;
+}
+.required-field::after {
+    content: "*";
+    color: #dc3545;
+    margin-left: 4px;
+}
+

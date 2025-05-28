@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Выход";
+}
+
+@* <h2>Вы действительно хотите выйти?</h2> *@
+
+@* <form asp-action="Logout" method="post"> *@
+@*     <button type="submit" name="exit" class="btn btn-danger">Выйти</button> *@
+@*     <a asp-controller="" asp-action="Index" class="btn btn-secondary">Отмена</a> *@
+@* </form> *@
+<!-- Модальное окно для выхода -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Подтверждение выхода</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+                Вы действительно хотите выйти из аккаунта?
+            </div>
+            <div class="modal-footer">
+                <a asp-controller="" asp-action="Index" class="btn btn-secondary">Отмена</a>
+
+                <!-- Форма выхода -->
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    <button type="submit" name="exit" class="btn btn-danger">Выйти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
